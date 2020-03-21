@@ -8,7 +8,7 @@
             {% if  isindex %}
                 {% if article.article_order > 0 %}
                     <a href="{{ article.get_absolute_url }}"
-                       rel="bookmark">【置顶】{{ article.title }}</a>
+                       rel="bookmark">【置頂】{{ article.title }}</a>
                 {% else %}
                     <a href="{{ article.get_absolute_url }}"
                        rel="bookmark">{{ article.title }}</a>
@@ -24,9 +24,9 @@
                    rel="nofollow">
                     <span class="leave-reply">
                     {% if article.comment and article.comment_set.count %}
-                        {{ article.comment_set.count }}个评论
+                        {{ article.comment_set.count }}個評論
                     {% else %}
-                        发表评论
+                        發表評論
                     {% endif %}
                     </span>
                 </a>

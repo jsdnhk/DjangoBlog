@@ -75,11 +75,11 @@ def cache_decorator(expiration=3 * 60):
 
 def expire_view_cache(path, servername, serverport, key_prefix=None):
     '''
-    刷新视图缓存
-    :param path:url路径
+    刷新視圖緩存
+    :param path:url路徑
     :param servername:host
     :param serverport:端口
-    :param key_prefix:前缀
+    :param key_prefix:前綴
     :return:是否成功
     '''
     from django.http import HttpRequest
@@ -100,7 +100,7 @@ def expire_view_cache(path, servername, serverport, key_prefix=None):
 
 def block_code(text, lang, inlinestyles=False, linenos=False):
     '''
-    markdown代码高亮
+    markdown代碼高亮
     :param text:
     :param lang:
     :param inlinestyles:
@@ -196,8 +196,8 @@ def get_blog_setting():
         if not BlogSettings.objects.count():
             setting = BlogSettings()
             setting.sitename = 'DjangoBlog'
-            setting.site_description = '基于Django的博客系统'
-            setting.site_seo_description = '基于Django的博客系统'
+            setting.site_description = '基於Django的博客系統'
+            setting.site_seo_description = '基於Django的博客系統'
             setting.site_keywords = 'Django,Python'
             setting.article_sub_length = 300
             setting.sidebar_article_count = 10
@@ -216,9 +216,9 @@ def get_blog_setting():
 
 def save_user_avatar(url):
     '''
-    保存用户头像
-    :param url:头像url
-    :return: 本地路径
+    保存用戶頭像
+    :param url:頭像url
+    :return: 本地路徑
     '''
     setting = get_blog_setting()
     logger.info(url)
@@ -241,7 +241,7 @@ def save_user_avatar(url):
             isimage = len([i for i in imgextensions if url.endswith(i)]) > 0
             ext = os.path.splitext(url)[1] if isimage else '.jpg'
             savefilename = str(uuid.uuid4().hex) + ext
-            logger.info('保存用户头像:' + basepath + savefilename)
+            logger.info('保存用戶頭像:' + basepath + savefilename)
             with open(basepath + savefilename, 'wb+') as file:
                 file.write(rsp.content)
             return 'https://resource.lylinux.net/avatar/' + savefilename

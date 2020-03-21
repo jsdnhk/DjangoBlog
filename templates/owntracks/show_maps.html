@@ -23,16 +23,16 @@
             font-size: 14px;
         }
     </style>
-    <title>运动轨迹</title>
+    <title>運動軌跡</title>
 </head>
 
 <body>
 <div id="container"></div>
 <script type="text/javascript" src='//webapi.amap.com/maps?v=1.4.4&key=9c89950bdfbcecd46f814309384655cd'></script>
-<!-- UI组件库 1.0 -->
+<!-- UI組件庫 1.0 -->
 <script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
 <script type="text/javascript">
-    //创建地图
+    //創建地圖
     var map = new AMap.Map('container', {
         zoom: 4
     });
@@ -40,7 +40,7 @@
     AMapUI.load(['ui/misc/PathSimplifier', 'lib/$'], function (PathSimplifier, $) {
 
         if (!PathSimplifier.supportCanvas) {
-            alert('当前环境不支持 Canvas！');
+            alert('當前環境不支持 Canvas！');
             return;
         }
 
@@ -54,7 +54,7 @@
         var pathSimplifierIns = new PathSimplifier({
             zIndex: 100,
             //autoSetFitView:false,
-            map: map, //所属的地图实例
+            map: map, //所屬的地圖實例
 
             getPath: function (pathData, pathIndex) {
 
@@ -64,10 +64,10 @@
 
                 if (pointIndex >= 0) {
                     //point
-                    return pathData.name + '，点：' + pointIndex + '/' + pathData.path.length;
+                    return pathData.name + '，點：' + pointIndex + '/' + pathData.path.length;
                 }
 
-                return pathData.name + '，点数量' + pathData.path.length;
+                return pathData.name + '，點數量' + pathData.path.length;
             },
             renderOptions: {
                 pathLineStyle: {
@@ -96,12 +96,12 @@
 
         window.pathSimplifierIns = pathSimplifierIns;
 
-        $('<div id="loadingTip">加载数据，请稍候...</div>').appendTo(document.body);
+        $('<div id="loadingTip">加載數據，請稍候...</div>').appendTo(document.body);
 
         $.getJSON('/owntracks/get_datas?date={{ date }}', function (d) {
 
             if (!d || !d.length) {
-                $("#loadingTip").text("没有数据...")
+                $("#loadingTip").text("沒有數據...")
                 return;
             }
             $('#loadingTip').remove();
@@ -114,7 +114,7 @@
             }
 
             function onerror(e) {
-                alert('图片加载失败！');
+                alert('圖片加載失敗！');
             }
 
             d.forEach(function (item, index) {

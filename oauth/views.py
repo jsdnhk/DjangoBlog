@@ -83,7 +83,7 @@ def authorize(request):
             user = temp
         except ObjectDoesNotExist:
             pass
-        # facebook的token过长
+        # facebook的token過長
         if type == 'facebook':
             user.token = ''
         if user.email:
@@ -142,17 +142,17 @@ def emailconfirm(request, id, sign):
 
     site = get_current_site().domain
     content = '''
-     <p>恭喜您，您已经成功绑定您的邮箱，您可以使用{type}来直接免密码登录本网站.欢迎您继续关注本站，地址是</p>
+     <p>恭喜您，您已經成功綁定您的郵箱，您可以使用{type}來直接免密碼登錄本網站.歡迎您繼續關注本站，地址是</p>
 
                 <a href="{url}" rel="bookmark">{url}</a>
 
-                再次感谢您！
+                再次感謝您！
                 <br />
-                如果上面链接无法打开，请将此链接复制至浏览器。
+                如果上面鏈接無法打開，請將此鏈接複製至瀏覽器。
                 {url}
     '''.format(type=oauthuser.type, url='http://' + site)
 
-    send_email(emailto=[oauthuser.email, ], title='恭喜您绑定成功!', content=content)
+    send_email(emailto=[oauthuser.email, ], title='恭喜您綁定成功!', content=content)
     url = reverse('oauth:bindsuccess', kwargs={
         'oauthid': id
     })
@@ -204,16 +204,16 @@ class RequireEmailView(FormView):
         url = "http://{site}{path}".format(site=site, path=path)
 
         content = """
-                <p>请点击下面链接绑定您的邮箱</p>
+                <p>請點擊下面鏈接綁定您的郵箱</p>
 
                 <a href="{url}" rel="bookmark">{url}</a>
 
-                再次感谢您！
+                再次感謝您！
                 <br />
-                如果上面链接无法打开，请将此链接复制至浏览器。
+                如果上面鏈接無法打開，請將此鏈接複製至瀏覽器。
                 {url}
                 """.format(url=url)
-        send_email(emailto=[email, ], title='绑定您的电子邮箱', content=content)
+        send_email(emailto=[email, ], title='綁定您的電子郵箱', content=content)
         url = reverse('oauth:bindsuccess', kwargs={
             'oauthid': oauthid
         })
@@ -225,11 +225,11 @@ def bindsuccess(request, oauthid):
     type = request.GET.get('type', None)
     oauthuser = get_object_or_404(OAuthUser, pk=oauthid)
     if type == 'email':
-        title = '绑定成功'
-        content = "恭喜您，还差一步就绑定成功了，请登录您的邮箱查看邮件完成绑定，谢谢。"
+        title = '綁定成功'
+        content = "恭喜您，還差一步就綁定成功了，請登錄您的郵箱查看郵件完成綁定，謝謝。"
     else:
-        title = '绑定成功'
-        content = "恭喜您绑定成功，您以后可以使用{type}来直接免密码登录本站啦，感谢您对本站对关注。".format(type=oauthuser.type)
+        title = '綁定成功'
+        content = "恭喜您綁定成功，您以後可以使用{type}來直接免密碼登錄本站啦，感謝您對本站對關注。".format(type=oauthuser.type)
     return render(request, 'oauth/bindsuccess.html', {
         'title': title,
         'content': content

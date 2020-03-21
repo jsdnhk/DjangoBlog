@@ -17,7 +17,7 @@ from django.core.management.base import BaseCommand
 from blog.models import Article
 
 
-# TODO 参数化
+# TODO 參數化
 class Command(BaseCommand):
     help = 'build search index'
 

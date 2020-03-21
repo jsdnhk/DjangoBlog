@@ -45,16 +45,16 @@ class RegisterView(FormView):
                                                                                    sign=sign)
 
             content = """
-                            <p>请点击下面链接验证您的邮箱</p>
+                            <p>請點擊下面鏈接驗證您的郵箱</p>
     
                             <a href="{url}" rel="bookmark">{url}</a>
     
-                            再次感谢您！
+                            再次感謝您！
                             <br />
-                            如果上面链接无法打开，请将此链接复制至浏览器。
+                            如果上面鏈接無法打開，請將此鏈接複製至瀏覽器。
                             {url}
                             """.format(url=url)
-            send_email(emailto=[user.email, ], title='验证您的电子邮箱', content=content)
+            send_email(emailto=[user.email, ], title='驗證您的電子郵箱', content=content)
 
             url = reverse('accounts:result') + '?type=register&id=' + str(user.id)
             return HttpResponseRedirect(url)
@@ -135,9 +135,9 @@ def account_result(request):
     if type and type in ['register', 'validation']:
         if type == 'register':
             content = '''
-    恭喜您注册成功，一封验证邮件已经发送到您 {email} 的邮箱，请验证您的邮箱后登录本站。
+    恭喜您註冊成功，一封驗證郵件已經發送到您 {email} 的郵箱，請驗證您的郵箱後登錄本站。
     '''.format(email=user.email)
-            title = '注册成功'
+            title = '註冊成功'
         else:
             c_sign = get_md5(get_md5(settings.SECRET_KEY + str(user.id)))
             sign = request.GET.get('sign')
@@ -146,9 +146,9 @@ def account_result(request):
             user.is_active = True
             user.save()
             content = '''
-            恭喜您已经成功的完成邮箱验证，您现在可以使用您的账号来登录本站。
+            恭喜您已經成功的完成郵箱驗證，您現在可以使用您的賬號來登錄本站。
             '''
-            title = '验证成功'
+            title = '驗證成功'
         return render(request, 'account/result.html', {
             'title': title,
             'content': content

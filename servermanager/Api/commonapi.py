@@ -42,4 +42,4 @@ class TuLing():
                 return jsons["text"]
         except Exception as e:
             logger.error(e)
-        return "哎呀，出错啦。"
+        return "哎呀，出錯啦。"

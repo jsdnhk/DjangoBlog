@@ -102,13 +102,13 @@ class ArticleTest(TestCase):
         self.__check_pagination__(p, '', '')
 
         p = Paginator(Article.objects.filter(tags=tag), 2)
-        self.__check_pagination__(p, '分类标签归档', tag.slug)
+        self.__check_pagination__(p, '分類標籤歸檔', tag.slug)
 
         p = Paginator(Article.objects.filter(author__username='liangliangyy'), 2)
-        self.__check_pagination__(p, '作者文章归档', 'liangliangyy')
+        self.__check_pagination__(p, '作者文章歸檔', 'liangliangyy')
 
         p = Paginator(Article.objects.filter(category=category), 2)
-        self.__check_pagination__(p, '分类目录归档', category.slug)
+        self.__check_pagination__(p, '分類目錄歸檔', category.slug)
 
         f = BlogSearchForm()
         f.search()

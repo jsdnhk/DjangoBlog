@@ -1,7 +1,7 @@
-# 主要功能配置介绍:
+# 主要功能配置介紹:
 
-## 缓存：
-缓存默认使用`memcache`缓存，如果你没有`memcache`环境，则将`settings.py`中的`locmemcache`改为`default`,并删除默认的`default`配置即可。
+## 緩存：
+緩存默認使用`memcache`緩存，如果你沒有`memcache`環境，則將`settings.py`中的`locmemcache`改爲`default`,並刪除默認的`default`配置即可。
 ```python
 CACHES = {
     'default': {
@@ -17,21 +17,21 @@ CACHES = {
     }
 }
 ```
-## oauth登录:
+## oauth登錄:
 
-现在已经支持QQ，微博，Google，GitHub，Facebook登录，需要在其对应的开放平台申请oauth登录权限，然后在  
-**后台->Oauth** 配置中新增配置，填写对应的`appkey`和`appsecret`以及回调地址。  
-### 回调地址示例：
+現在已經支持QQ，微博，Google，GitHub，Facebook登錄，需要在其對應的開放平臺申請oauth登錄權限，然後在  
+**後臺->Oauth** 配置中新增配置，填寫對應的`appkey`和`appsecret`以及回調地址。  
+### 回調地址示例：
 qq：http://你的域名/oauth/authorize?type=qq  
 微博：http://你的域名/oauth/authorize?type=weibo  
-type对应在`oauthmanager`中的type字段。
+type對應在`oauthmanager`中的type字段。
 
 ## owntracks：
-owntracks是一个位置追踪软件，可以定时的将你的坐标提交到你的服务器上，现在简单的支持owntracks功能，需要安装owntracks的app，然后将api地址设置为:
-`你的域名/owntracks/logtracks`就可以了。然后访问`你的域名/owntracks/show_dates`就可以看到有经纬度记录的日期，点击之后就可以看到运动轨迹了。地图是使用高德地图绘制。
+owntracks是一個位置追蹤軟件，可以定時的將你的座標提交到你的服務器上，現在簡單的支持owntracks功能，需要安裝owntracks的app，然後將api地址設置爲:
+`你的域名/owntracks/logtracks`就可以了。然後訪問`你的域名/owntracks/show_dates`就可以看到有經緯度記錄的日期，點擊之後就可以看到運動軌跡了。地圖是使用高德地圖繪製。
 
-## 邮件功能：
-同样，将`settings.py`中的`ADMINS = [('liangliang', 'liangliangyy@gmail.com')]`配置为你自己的错误接收邮箱，另外修改:
+## 郵件功能：
+同樣，將`settings.py`中的`ADMINS = [('liangliang', 'liangliangyy@gmail.com')]`配置爲你自己的錯誤接收郵箱，另外修改:
 ```python
 EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_PORT = 587
@@ -40,25 +40,25 @@ EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_EMAIL_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = os.environ.get('DJANGO_EMAIL_USER')
 ```
-为你自己的邮箱配置。
+爲你自己的郵箱配置。
 
-## 微信公众号
-集成了简单的微信公众号功能，在微信后台将token地址设置为:`你的域名/robot` 即可，默认token为`lylinux`，当然你可以修改为你自己的，在`servermanager/robot.py`中。
-然后在**后台->Servermanager->命令**中新增命令，这样就可以使用微信公众号来管理了。  
-## 网站配置介绍  
-在**后台->BLOG->网站配置**中,可以新增网站配置，比如关键字，描述等，以及谷歌广告，网站统计代码及备案号等等。  
-其中的*静态文件保存地址*是保存oauth用户登录的头像路径，填写绝对路径，默认是代码目录。
-## 代码高亮
-如果你发现你文章的代码没有高亮，请这样书写代码块:  
+## 微信公衆號
+集成了簡單的微信公衆號功能，在微信後臺將token地址設置爲:`你的域名/robot` 即可，默認token爲`lylinux`，當然你可以修改爲你自己的，在`servermanager/robot.py`中。
+然後在**後臺->Servermanager->命令**中新增命令，這樣就可以使用微信公衆號來管理了。  
+## 網站配置介紹  
+在**後臺->BLOG->網站配置**中,可以新增網站配置，比如關鍵字，描述等，以及谷歌廣告，網站統計代碼及備案號等等。  
+其中的*靜態文件保存地址*是保存oauth用戶登錄的頭像路徑，填寫絕對路徑，默認是代碼目錄。
+## 代碼高亮
+如果你發現你文章的代碼沒有高亮，請這樣書寫代碼塊:  
 
 ![](https://resource.lylinux.net/image/codelang.png)  
 
 
-也就是说，需要在代码块开始位置加入这段代码对应的语言。
+也就是說，需要在代碼塊開始位置加入這段代碼對應的語言。
 
 ## update
-如果你发现执行数据库迁移的时候出现如下报错：
+如果你發現執行數據庫遷移的時候出現如下報錯：
 ```python
 django.db.migrations.exceptions.MigrationSchemaMissing: Unable to create the django_migrations table ((1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(6) NOT NULL)' at line 1"))
 ```
-可能是因为你的mysql版本低于5.6，需要升级mysql版本>=5.6即可。
+可能是因爲你的mysql版本低於5.6，需要升級mysql版本>=5.6即可。

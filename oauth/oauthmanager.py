@@ -27,18 +27,18 @@ logger = logging.getLogger(__name__)
 
 class OAuthAccessTokenException(Exception):
     '''
-    oauth授权失败异常
+    oauth授權失敗異常
     '''
 
 
 class BaseOauthManager(metaclass=ABCMeta):
-    """获取用户授权"""
+    """獲取用戶授權"""
     AUTH_URL = None
-    """获取token"""
+    """獲取token"""
     TOKEN_URL = None
-    """获取用户信息"""
+    """獲取用戶信息"""
     API_URL = None
-    '''icon图标名'''
+    '''icon圖標名'''
     ICON_NAME = None
 
     def __init__(self, access_token=None, openid=None):

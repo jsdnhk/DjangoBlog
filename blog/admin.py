@@ -49,10 +49,10 @@ def open_article_commentstatus(modeladmin, request, queryset):
     queryset.update(comment_status='o')
 
 
-makr_article_publish.short_description = '发布选中文章'
-draft_article.short_description = '选中文章设置为草稿'
-close_article_commentstatus.short_description = '关闭文章评论'
-open_article_commentstatus.short_description = '打开文章评论'
+makr_article_publish.short_description = '發佈選中文章'
+draft_article.short_description = '選中文章設置爲草稿'
+close_article_commentstatus.short_description = '關閉文章評論'
+open_article_commentstatus.short_description = '打開文章評論'
 
 
 class ArticlelAdmin(admin.ModelAdmin):
@@ -73,7 +73,7 @@ class ArticlelAdmin(admin.ModelAdmin):
         link = reverse('admin:%s_%s_change' % info, args=(obj.category.id,))
         return format_html(u'<a href="%s">%s</a>' % (link, obj.category.name))
 
-    link_to_category.short_description = '分类目录'
+    link_to_category.short_description = '分類目錄'
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(ArticlelAdmin, self).get_form(request, obj, **kwargs)

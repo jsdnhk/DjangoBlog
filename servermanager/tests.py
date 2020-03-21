@@ -48,7 +48,7 @@ class ServerManagerTest(TestCase):
         rsp = category(None, None)
         self.assertIsNotNone(rsp)
         rsp = recents(None, None)
-        self.assertTrue(rsp != '暂时还没有文章')
+        self.assertTrue(rsp != '暫時還沒有文章')
 
         cmd = commands()
         cmd.title = "test"

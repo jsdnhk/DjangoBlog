@@ -31,7 +31,7 @@ $(document).ready(function () {
 
 
 
-/** 侧边栏回到顶部 */
+/** 側邊欄回到頂部 */
 var rocket = $('#rocket');
 
 $(window).on('scroll', debounce(slideTopSet, 300));

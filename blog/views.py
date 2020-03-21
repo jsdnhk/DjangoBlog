@@ -20,13 +20,13 @@ logger = logging.getLogger(__name__)
 
 
 class ArticleListView(ListView):
-    # template_name属性用于指定使用哪个模板进行渲染
+    # template_name屬性用於指定使用哪個模板進行渲染
     template_name = 'blog/article_index.html'
 
-    # context_object_name属性用于给上下文变量取名（在模板中使用该名字）
+    # context_object_name屬性用於給上下文變量取名（在模板中使用該名字）
     context_object_name = 'article_list'
 
-    # 页面类型，分类目录或标签列表等
+    # 頁面類型，分類目錄或標籤列表等
     page_type = ''
     paginate_by = settings.PAGINATE_BY
     page_kwarg = 'page'
@@ -43,20 +43,20 @@ class ArticleListView(ListView):
 
     def get_queryset_cache_key(self):
         """
-        子类重写.获得queryset的缓存key
+        子類重寫.獲得queryset的緩存key
         """
         raise NotImplementedError()
 
     def get_queryset_data(self):
         """
-        子类重写.获取queryset的数据
+        子類重寫.獲取queryset的數據
         """
         raise NotImplementedError()
 
     def get_queryset_from_cache(self, cache_key):
         '''
-        缓存页面数据
-        :param cache_key: 缓存key
+        緩存頁面數據
+        :param cache_key: 緩存key
         :return:
         '''
         value = cache.get(cache_key)
@@ -71,7 +71,7 @@ class ArticleListView(ListView):
 
     def get_queryset(self):
         '''
-        重写默认，从缓存获取数据
+        重寫默認，從緩存獲取數據
         :return:
         '''
         key = self.get_queryset_cache_key()
@@ -85,9 +85,9 @@ class ArticleListView(ListView):
 
 class IndexView(ArticleListView):
     '''
-    首页
+    首頁
     '''
-    # 友情链接类型
+    # 友情鏈接類型
     link_type = 'i'
 
     def get_queryset_data(self):
@@ -101,7 +101,7 @@ class IndexView(ArticleListView):
 
 class ArticleDetailView(DetailView):
     '''
-    文章详情页面
+    文章詳情頁面
     '''
     template_name = 'blog/article_detail.html'
     model = Article
@@ -118,7 +118,7 @@ class ArticleDetailView(DetailView):
         articleid = int(self.kwargs[self.pk_url_kwarg])
         comment_form = CommentForm()
         user = self.request.user
-        # 如果用户已经登录，则隐藏邮件和用户名输入框
+        # 如果用戶已經登錄，則隱藏郵件和用戶名輸入框
         if user.is_authenticated and not user.is_anonymous and user.email and user.username:
             comment_form.fields.update({
                 'email': forms.CharField(widget=forms.HiddenInput()),
@@ -141,9 +141,9 @@ class ArticleDetailView(DetailView):
 
 class CategoryDetailView(ArticleListView):
     '''
-    分类目录列表
+    分類目錄列表
     '''
-    page_type = "分类目录归档"
+    page_type = "分類目錄歸檔"
 
     def get_queryset_data(self):
         slug = self.kwargs['category_name']
@@ -177,9 +177,9 @@ class CategoryDetailView(ArticleListView):
 
 class AuthorDetailView(ArticleListView):
     '''
-    作者详情页
+    作者詳情頁
     '''
-    page_type = '作者文章归档'
+    page_type = '作者文章歸檔'
 
     def get_queryset_cache_key(self):
         author_name = self.kwargs['author_name']
@@ -200,9 +200,9 @@ class AuthorDetailView(ArticleListView):
 
 class TagDetailView(ArticleListView):
     '''
-    标签列表页面
+    標籤列表頁面
     '''
-    page_type = '分类标签归档'
+    page_type = '分類標籤歸檔'
 
     def get_queryset_data(self):
         slug = self.kwargs['tag_name']
@@ -230,9 +230,9 @@ class TagDetailView(ArticleListView):
 
 class ArchivesView(ArticleListView):
     '''
-    文章归档页面
+    文章歸檔頁面
     '''
-    page_type = '文章归档'
+    page_type = '文章歸檔'
     paginate_by = None
     page_kwarg = None
     template_name = 'blog/article_archives.html'
@@ -256,7 +256,7 @@ class LinkListView(ListView):
 @csrf_exempt
 def fileupload(request):
     """
-    该方法需自己写调用端来上传图片，该方法仅提供图床功能
+    該方法需自己寫調用端來上傳圖片，該方法僅提供圖牀功能
     :param request:
     :return:
     """
@@ -318,16 +318,16 @@ def page_not_found_view(request, exception, template_name='blog/error_page.html'
         logger.error(exception)
     url = request.get_full_path()
     return render(request, template_name,
-                  {'message': '哎呀，您访问的地址 ' + url + ' 是一个未知的地方。请点击首页看看别的？', 'statuscode': '404'}, status=404)
+                  {'message': '哎呀，您訪問的地址 ' + url + ' 是一個未知的地方。請點擊首頁看看別的？', 'statuscode': '404'}, status=404)
 
 
 def server_error_view(request, template_name='blog/error_page.html'):
     return render(request, template_name,
-                  {'message': '哎呀，出错了，我已经收集到了错误信息，之后会抓紧抢修，请点击首页看看别的？', 'statuscode': '500'}, status=500)
+                  {'message': '哎呀，出錯了，我已經收集到了錯誤信息，之後會抓緊搶修，請點擊首頁看看別的？', 'statuscode': '500'}, status=500)
 
 
 def permission_denied_view(request, exception, template_name='blog/error_page.html'):
     if exception:
         logger.error(exception)
     return render(request, template_name,
-                  {'message': '哎呀，您没有权限访问此页面，请点击首页看看别的？', 'statuscode': '403'}, status=403)
+                  {'message': '哎呀，您沒有權限訪問此頁面，請點擊首頁看看別的？', 'statuscode': '403'}, status=403)

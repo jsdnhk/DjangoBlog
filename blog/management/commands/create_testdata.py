@@ -25,16 +25,16 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         user = \
-            get_user_model().objects.get_or_create(email='test@test.com', username='测试用户',
+            get_user_model().objects.get_or_create(email='test@test.com', username='測試用戶',
                                                    password='test!q@w#eTYU')[0]
 
-        pcategory = Category.objects.get_or_create(name='我是父类目', parent_category=None)[0]
+        pcategory = Category.objects.get_or_create(name='我是父類目', parent_category=None)[0]
 
-        category = Category.objects.get_or_create(name='子类目', parent_category=pcategory)[0]
+        category = Category.objects.get_or_create(name='子類目', parent_category=pcategory)[0]
 
         category.save()
         basetag = Tag()
-        basetag.name = "标签"
+        basetag.name = "標籤"
         basetag.save()
         for i in range(1, 20):
             article = Article.objects.get_or_create(category=category,
@@ -43,7 +43,7 @@ class Command(BaseCommand):
                                                     author=user
                                                     )[0]
             tag = Tag()
-            tag.name = "标签" + str(i)
+            tag.name = "標籤" + str(i)
             tag.save()
             article.tags.add(tag)
             article.tags.add(basetag)

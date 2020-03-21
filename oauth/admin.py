@@ -35,8 +35,8 @@ class OAuthUserAdmin(admin.ModelAdmin):
         img = obj.picture
         return format_html(u'<img src="%s" style="width:50px;height:50px"></img>' % (img))
 
-    link_to_usermodel.short_description = '用户'
-    show_user_image.short_description = '用户头像'
+    link_to_usermodel.short_description = '用戶'
+    show_user_image.short_description = '用戶頭像'
 
 
 class OAuthConfigAdmin(admin.ModelAdmin):

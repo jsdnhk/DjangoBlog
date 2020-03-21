@@ -72,14 +72,14 @@ def search(message, session):
         reply = convert_to_articlereply(articles, message)
         return reply
     else:
-        return '没有找到相关文章。'
+        return '沒有找到相關文章。'
 
 
 @robot.filter(re.compile(r'^category\s*$', re.I))
 def category(message, session):
     categorys = blogapi.get_category_lists()
     content = ','.join(map(lambda x: x.name, categorys))
-    return '所有文章分类目录：' + content
+    return '所有文章分類目錄：' + content
 
 
 @robot.filter(re.compile(r'^recent\s*$', re.I))
@@ -89,39 +89,39 @@ def recents(message, session):
         reply = convert_to_articlereply(articles, message)
         return reply
     else:
-        return "暂时还没有文章"
+        return "暫時還沒有文章"
 
 
 @robot.filter(re.compile('^help$', re.I))
 def help(message, session):
-    return '''欢迎关注!
-            默认会与图灵机器人聊天~~
-        你可以通过下面这些命令来获得信息
-        ?关键字搜索文章.
+    return '''歡迎關注!
+            默認會與圖靈機器人聊天~~
+        你可以通過下面這些命令來獲得信息
+        ?關鍵字搜索文章.
         如?python.
-        category获得文章分类目录及文章数.
-        category-***获得该分类目录文章
+        category獲得文章分類目錄及文章數.
+        category-***獲得該分類目錄文章
         如category-python
-        recent获得最新文章
-        help获得帮助.
-        weather:获得天气
+        recent獲得最新文章
+        help獲得幫助.
+        weather:獲得天氣
         如weather:西安
-        idcard:获得身份证信息
+        idcard:獲得身份證信息
         如idcard:61048119xxxxxxxxxx
-        music:音乐搜索
-        如music:阴天快乐
-        PS:以上标点符号都不支持中文标点~~
+        music:音樂搜索
+        如music:陰天快樂
+        PS:以上標點符號都不支持中文標點~~
         '''
 
 
 @robot.filter(re.compile('^weather\:.*$', re.I))
 def weather(message, session):
-    return "建设中..."
+    return "建設中..."
 
 
 @robot.filter(re.compile('^idcard\:.*$', re.I))
 def idcard(message, session):
-    return "建设中..."
+    return "建設中..."
 
 
 @robot.handler
@@ -139,14 +139,14 @@ class CommandHandler():
         if cmd:
             return self.__run_command__(cmd[0].command)
         else:
-            return "未找到相关命令，请输入hepme获得帮助。"
+            return "未找到相關命令，請輸入hepme獲得幫助。"
 
     def __run_command__(self, cmd):
         try:
             str = os.popen(cmd).read()
             return str
         except:
-            return '命令执行出错!'
+            return '命令執行出錯!'
 
     def get_help(self):
         rsp = ''
@@ -193,7 +193,7 @@ class MessageHandler():
         if info.upper() == 'ADMIN':
             self.userinfo.isAdmin = True
             self.savesession()
-            return "输入管理员密码"
+            return "輸入管理員密碼"
         if self.userinfo.isAdmin and not self.userinfo.isPasswordSet:
             passwd = settings.WXADMIN
             if settings.TESTING:
@@ -201,15 +201,15 @@ class MessageHandler():
             if passwd.upper() == get_md5(get_md5(info)).upper():
                 self.userinfo.isPasswordSet = True
                 self.savesession()
-                return "验证通过,请输入命令或者要执行的命令代码:输入helpme获得帮助"
+                return "驗證通過,請輸入命令或者要執行的命令代碼:輸入helpme獲得幫助"
             else:
                 if self.userinfo.Count >= 3:
                     self.userinfo = WxUserInfo()
                     self.savesession()
-                    return "超过验证次数"
+                    return "超過驗證次數"
                 self.userinfo.Count += 1
                 self.savesession()
-                return "验证失败，请重新输入管理员密码:"
+                return "驗證失敗，請重新輸入管理員密碼:"
         if self.userinfo.isAdmin and self.userinfo.isPasswordSet:
             if self.userinfo.Command != '' and info.upper() == 'Y':
                 return cmdhandler.run(self.userinfo.Command)
@@ -218,7 +218,7 @@ class MessageHandler():
                     return cmdhandler.get_help()
                 self.userinfo.Command = info
                 self.savesession()
-                return "确认执行: " + info + " 命令?"
+                return "確認執行: " + info + " 命令?"
         rsp = tuling.getdata(info)
         return rsp
 
@@ -241,5 +241,5 @@ def hello(message, session):
         reply = convert_to_articlereply(articles, message)
         return reply
     else:
-        return '没有找到相关文章。'
+        return '沒有找到相關文章。'
 """
